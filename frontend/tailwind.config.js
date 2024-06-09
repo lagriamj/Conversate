@@ -1,50 +1,78 @@
+/* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
+  darkMode: ["class"],
   content: [
-    "./resources/**/*.blade.php",
-    "./resources/**/*.vue",
-    './src/**/*.html',
-    './src/**/*.jsx',
-    './src/index.css',
+    './pages/**/*.{js,jsx}',
+    './components/**/*.{js,jsx}',
+    './app/**/*.{js,jsx}',
+    './src/**/*.{js,jsx}',
   ],
+  prefix: "",
   theme: {
-    fontFamily: {
-      sans: ['Poppins', 'sans-serif'],
-    },
-    letterSpacing: {
-      tightest: '-.075em',
-      tighter: '-.05em',
-      tight: '-.025em',
-      normal: '0',
-      wide: '.025em',
-      wider: '.05em',
-      widest: '.1em',
-      mostWidest: '.50em',
+    container: {
+      center: true,
+      padding: "2rem",
+      screens: {
+        "2xl": "1400px",
+      },
     },
     extend: {
       colors: {
-        'main': '#34353A',
-        'secondary': '#334D66',
-        'lightgrey': 'rgb(211, 211, 211)',
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
+        primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
+        },
+        secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
+        },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
+        accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
+        },
       },
       borderRadius: {
-        'custom-bl': '60%',
-        'custom-tl': '4%',
+        lg: "var(--radius)",
+        md: "calc(var(--radius) - 2px)",
+        sm: "calc(var(--radius) - 4px)",
       },
-      fontFamily: {
-        sans: ['Poppins', 'sans-serif'],
-        'sans-semi': ['Poppins Semibold', 'sans-serif'],
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0" },
+          to: { height: "var(--radix-accordion-content-height)" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)" },
+          to: { height: "0" },
+        },
       },
-      screens: {
-        'mediumLg' : '1366px',
-        'gotoLarge' : '1400px',
-        'large' : '1530px',
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },
-  plugins: [
-    // eslint-disable-next-line no-undef
-    // require('daisyui'),
-  ],
+  plugins: [require("tailwindcss-animate")],
 }
-
