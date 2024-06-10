@@ -1,9 +1,11 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import AuthService from "@/api/auth/AuthService";
 
+const token = localStorage.getItem("token");
+
 const initialState = {
   user: null,
-  token: null,
+  token: token ? token : null,
   status: "idle",
   error: null,
 };

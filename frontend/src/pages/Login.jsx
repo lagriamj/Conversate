@@ -10,22 +10,29 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../features/auth/authSlice";
 import { Loader2 } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const { error, status } = useSelector((state) => state.auth);
-  console.log("error: ", error);
+  const { error, status, token } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const loginSubmit = (e) => {
     e.preventDefault();
     dispatch(login({ email, password }));
   };
+
+  useEffect(() => {
+    if (token) {
+      navigate("/");
+    }
+  }, [navigate, token]);
 
   return (
     <div className="w-full h-screen flex items-center justify-center">
